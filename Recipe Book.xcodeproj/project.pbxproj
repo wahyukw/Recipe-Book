@@ -8,11 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		82FDD9D42EC593A800735603 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FDD9D32EC593A800735603 /* Recipe.swift */; };
+		82FDD9E02EC5954D00735603 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82FDD9DB2EC5954D00735603 /* Assets.xcassets */; };
+		82FDD9E32EC595A200735603 /* OnboardingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FDD9E22EC595A200735603 /* OnboardingDetailView.swift */; };
+		82FDD9E52EC595AD00735603 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FDD9E42EC595AD00735603 /* OnboardingView.swift */; };
+		82FDDA2B2EC5975600735603 /* FontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FDDA2A2EC5975600735603 /* FontHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		82FDD9C42EC5933A00735603 /* Recipe Book.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Recipe Book.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82FDD9D32EC593A800735603 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		82FDD9DB2EC5954D00735603 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		82FDD9E22EC595A200735603 /* OnboardingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDetailView.swift; sourceTree = "<group>"; };
+		82FDD9E42EC595AD00735603 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		82FDDA2A2EC5975600735603 /* FontHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -37,6 +45,9 @@
 		82FDD9BB2EC5933900735603 = {
 			isa = PBXGroup;
 			children = (
+				82FDD9DB2EC5954D00735603 /* Assets.xcassets */,
+				82FDDA292EC5974200735603 /* Helper */,
+				82FDD9E12EC5957300735603 /* Onboarding */,
 				82FDD9C62EC5933A00735603 /* Recipe Book */,
 				82FDD9D22EC5936D00735603 /* Model */,
 				82FDD9C52EC5933A00735603 /* Products */,
@@ -57,6 +68,23 @@
 				82FDD9D32EC593A800735603 /* Recipe.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		82FDD9E12EC5957300735603 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				82FDD9E22EC595A200735603 /* OnboardingDetailView.swift */,
+				82FDD9E42EC595AD00735603 /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		82FDDA292EC5974200735603 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				82FDDA2A2EC5975600735603 /* FontHelper.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,6 +151,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82FDD9E02EC5954D00735603 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +162,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82FDDA2B2EC5975600735603 /* FontHelper.swift in Sources */,
+				82FDD9E32EC595A200735603 /* OnboardingDetailView.swift in Sources */,
+				82FDD9E52EC595AD00735603 /* OnboardingView.swift in Sources */,
 				82FDD9D42EC593A800735603 /* Recipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

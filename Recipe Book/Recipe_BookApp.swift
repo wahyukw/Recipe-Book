@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct Recipe_BookApp: App {
+    
+    @AppStorage("onboarding") var needsOnboarding = true
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .fullScreenCover(isPresented: $needsOnboarding) {
+                    needsOnboarding = false
+                } content: {
+                    OnboardingView()
+                }
         }
     }
 }
