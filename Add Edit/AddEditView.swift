@@ -44,7 +44,7 @@ struct AddEditView: View {
             Spacer()
             
             ScrollView{
-                VStack(spacing: 16){
+                VStack(spacing: 24){
                     PhotosPicker(selection: $selectedPhoto, matching: .images) {
                         VStack(spacing: 16) {
                             if let selectedImageData,
@@ -208,12 +208,11 @@ struct AddEditView: View {
                                     .keyboardType(.numberPad)
                             }
                         }
-                        
                     }
                     .padding()
                     .background(Color.white)
                     .cornerRadius(12)
-                    .shadow(color: Color.terracotta.opacity(0.1), radius: 8, x: 0, y: 2)
+                    .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
                 }
             }
             
