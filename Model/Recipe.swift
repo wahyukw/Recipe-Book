@@ -8,6 +8,7 @@
 import Foundation
 import SwiftData
 
+@Model
 class Recipe:Identifiable{
     
     @Attribute(.unique) var id : String
