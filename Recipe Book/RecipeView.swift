@@ -55,18 +55,16 @@ struct RecipeView: View {
                             .font(.bodyText)
                             .multilineTextAlignment(.center)
                     }
-                    .frame(maxWidth: 400)
                     Spacer()
                     Spacer()
                 }
-                
-                
             }
             .padding()
+            .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink {
-                        OnboardingView()
+                        AddEditView()
                     } label: {
                         Image(systemName: "plus")
                             .foregroundStyle(.terracotta)

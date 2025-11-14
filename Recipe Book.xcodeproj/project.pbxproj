@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		821F3A512EC72C7000FB1D3A /* AddEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F3A502EC72C7000FB1D3A /* AddEditView.swift */; };
 		82FDD9D42EC593A800735603 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FDD9D32EC593A800735603 /* Recipe.swift */; };
 		82FDD9E02EC5954D00735603 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82FDD9DB2EC5954D00735603 /* Assets.xcassets */; };
 		82FDD9E32EC595A200735603 /* OnboardingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FDD9E22EC595A200735603 /* OnboardingDetailView.swift */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		821F3A502EC72C7000FB1D3A /* AddEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditView.swift; sourceTree = "<group>"; };
 		82FDD9C42EC5933A00735603 /* Recipe Book.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Recipe Book.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82FDD9D32EC593A800735603 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		82FDD9DB2EC5954D00735603 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -42,9 +44,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		821F3A4F2EC72C5A00FB1D3A /* Add Edit */ = {
+			isa = PBXGroup;
+			children = (
+				821F3A502EC72C7000FB1D3A /* AddEditView.swift */,
+			);
+			path = "Add Edit";
+			sourceTree = "<group>";
+		};
 		82FDD9BB2EC5933900735603 = {
 			isa = PBXGroup;
 			children = (
+				821F3A4F2EC72C5A00FB1D3A /* Add Edit */,
 				82FDD9DB2EC5954D00735603 /* Assets.xcassets */,
 				82FDDA292EC5974200735603 /* Helper */,
 				82FDD9E12EC5957300735603 /* Onboarding */,
@@ -166,6 +177,7 @@
 				82FDD9E32EC595A200735603 /* OnboardingDetailView.swift in Sources */,
 				82FDD9E52EC595AD00735603 /* OnboardingView.swift in Sources */,
 				82FDD9D42EC593A800735603 /* Recipe.swift in Sources */,
+				821F3A512EC72C7000FB1D3A /* AddEditView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +312,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photos so you can add pictures to your recipes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -331,6 +345,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photos so you can add pictures to your recipes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

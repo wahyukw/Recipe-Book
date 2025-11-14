@@ -31,3 +31,17 @@ class Recipe:Identifiable{
         id = UUID().uuidString
     }
 }
+
+enum DifficultyLevel: String, Codable, CaseIterable {
+    case easy = "Easy"
+    case medium = "Medium"
+    case hard = "Hard"
+    
+    var emoji: String {
+        switch self {
+        case .easy: return "😊"
+        case .medium: return "🤔"
+        case .hard: return "🔥"
+        }
+    }
+}
