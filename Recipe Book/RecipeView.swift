@@ -24,14 +24,43 @@ struct RecipeView: View {
                     .textFieldStyle(.roundedBorder)
                     .padding(.bottom, 32)
                 
-                ScrollView(showsIndicators: false){
-                    LazyVStack(spacing: 32){
-                        RecipeCardView()
-                        RecipeCardView()
-                        RecipeCardView()
+                if recipes.count > 0{
+                    ScrollView(showsIndicators: false){
+                        LazyVStack(spacing: 32){
+                            RecipeCardView()
+                            RecipeCardView()
+                            RecipeCardView()
+                        }
+                        .padding(.bottom, 24)
                     }
-                    .padding(.bottom, 24)
+                }else{
+                    Spacer()
+                    VStack(spacing: 16){
+                        HStack{
+                            Spacer()
+                            ZStack{
+                                Circle()
+                                    .frame(width: 125)
+                                    .foregroundStyle(Color.paleTerracotta)
+                                Image(systemName: "book.pages")
+                                    .resizable()
+                                    .frame(width: 40, height: 50)
+                                    .foregroundStyle(Color.terracotta)
+                            }
+                            Spacer()
+                        }
+                        Text("No recipes Yet")
+                            .font(.sectionHeader)
+                        Text("Tap the + button to add your first recipe and start cooking!")
+                            .font(.bodyText)
+                            .multilineTextAlignment(.center)
+                    }
+                    .frame(maxWidth: 400)
+                    Spacer()
+                    Spacer()
                 }
+                
+                
             }
             .padding()
             .toolbar {
