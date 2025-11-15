@@ -60,7 +60,6 @@ struct RecipeView: View {
                 }
             }
             .padding()
-            .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink {
@@ -71,6 +70,7 @@ struct RecipeView: View {
                     }
                 }
             }
+            .background(Color.offWhite)
         }
     }
 }

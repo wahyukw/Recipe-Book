@@ -9,26 +9,45 @@ import Foundation
 import SwiftData
 
 @Model
-class Recipe:Identifiable{
+final class Recipe {
+    @Attribute(.unique) var id: String
+    var name: String
+    var cuisine: String
+    var difficulty: DifficultyLevel
+    var prepTime: Int
+    var cookTime: Int
+    var servings: Int
+    var ingredients: [String]
+    var instructions: [String]
+    var dateAdded: Date
+    var imageData: Data?
     
-    @Attribute(.unique) var id : String
-    var name = ""
-    var difficulty = ""
-    var prepTime = 0
-    var cookTime = 0
-    var servings = 0
-    var ingredients : [String] = []
-    var instructions : [String] = []
-    var dateAdded = Date()
-    var imageData : Data?
-    var rating: Int?
-    
-    var totalTime: Int{
+    var totalTime: Int {
         prepTime + cookTime
     }
     
-    init(){
-        id = UUID().uuidString
+    init(
+        name: String,
+        cuisine: String,
+        difficulty: DifficultyLevel,
+        prepTime: Int,
+        cookTime: Int,
+        servings: Int,
+        ingredients: [String] = [],
+        instructions: [String] = [],
+        imageData: Data? = nil
+    ) {
+        self.id = UUID().uuidString
+        self.name = name
+        self.cuisine = cuisine
+        self.difficulty = difficulty
+        self.prepTime = prepTime
+        self.cookTime = cookTime
+        self.servings = servings
+        self.ingredients = ingredients
+        self.instructions = instructions
+        self.dateAdded = Date()
+        self.imageData = imageData
     }
 }
 

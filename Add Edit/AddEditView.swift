@@ -12,6 +12,7 @@ import SwiftData
 struct AddEditView: View {
     
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var model
     
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var selectedImageData: Data?
@@ -21,6 +22,8 @@ struct AddEditView: View {
     @State private var prepTime = 30
     @State private var cookTime = 45
     @State private var servings = 4
+    @State private var ingredients: [String] = [""]
+    @State private var instructions: [String] = [""]
     
     var body: some View {
         VStack{
@@ -34,7 +37,7 @@ struct AddEditView: View {
                     .font(.sectionHeader)
                 Spacer()
                 Button("Save"){
-                    
+                    saveRecipe()
                 }
                 .foregroundStyle(.terracotta)
                 .bold()
@@ -45,6 +48,7 @@ struct AddEditView: View {
             
             ScrollView{
                 VStack(spacing: 24){
+                    //Photo picker
                     PhotosPicker(selection: $selectedPhoto, matching: .images) {
                         VStack(spacing: 16) {
                             if let selectedImageData,
@@ -65,6 +69,7 @@ struct AddEditView: View {
                                     
                                     Text("Add Photo")
                                         .font(.headline)
+                                        .bold()
                                         .foregroundColor(.secondary)
                                     
                                     Text("Upload a picture of your recipe")
@@ -88,6 +93,7 @@ struct AddEditView: View {
                             }
                         }
                     }
+                    //Recipe + Cuisine
                     VStack{
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Recipe Name")
@@ -122,6 +128,7 @@ struct AddEditView: View {
                     .cornerRadius(12)
                     .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
                     
+                    //Difficulty + prep time
                     VStack{
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Difficulty")
@@ -213,12 +220,132 @@ struct AddEditView: View {
                     .background(Color.white)
                     .cornerRadius(12)
                     .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
+                    
+                    //Ingredients
+                    VStack{
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Ingredients")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            
+                            ForEach(ingredients.indices, id:\.self){ index in
+                                HStack(spacing: 12){
+                                    TextField("e.g., 2 cups flour", text: $ingredients[index])
+                                        .foregroundColor(.secondary.opacity(0.5))
+                                        .padding(8)
+                                        .background(Color.white)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 12)
+                                                .stroke(Color(.systemGray4), lineWidth: 0.5)
+                                        )
+                                    if ingredients.count > 1 {
+                                        Button{
+                                            ingredients.remove(at: index)
+                                        }label:{
+                                            Image(systemName: "minus.circle.fill")
+                                                .font(.title2)
+                                                .foregroundColor(.terracotta)
+                                        }
+                                    }
+                                }
+                            }
+                            .padding(.bottom, 8)
+                            Button{
+                                ingredients.append("")
+                            }label:{
+                                HStack(spacing: 8){
+                                    Image(systemName: "plus.circle")
+                                    Text("Add Ingredient")
+                                }
+                                .font(.subheadline)
+                                .foregroundStyle(.terracotta)
+                            }
+                        }
+                        .padding(.bottom, 8)
+                        
+                    }
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(12)
+                    .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
+                    
+                    //Instructions
+                    VStack{
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Instructions")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            
+                            ForEach(instructions.indices, id:\.self){ index in
+                                HStack(alignment: .top, spacing: 12){
+                                    Text("\(index+1).")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                        .frame(width: 20, alignment: .leading)
+                                        .padding(.top, 12)
+                                    
+                                    TextField("Describe this step...", text: $instructions[index], axis: .vertical)
+                                        .lineLimit(3...6)
+                                        .foregroundColor(.secondary.opacity(0.5))
+                                        .padding(8)
+                                        .background(Color.white)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 12)
+                                                .stroke(Color(.systemGray4), lineWidth: 0.5)
+                                        )
+                                    if instructions.count > 1 {
+                                        Button{
+                                            instructions.remove(at: index)
+                                        }label:{
+                                            Image(systemName: "minus.circle.fill")
+                                                .font(.title2)
+                                                .foregroundColor(.terracotta)
+                                        }
+                                    }
+                                }
+                            }
+                            .padding(.bottom, 8)
+                            Button{
+                                instructions.append("")
+                            }label:{
+                                HStack(spacing: 8){
+                                    Image(systemName: "plus.circle")
+                                    Text("Add Steps")
+                                }
+                                .font(.subheadline)
+                                .foregroundStyle(.terracotta)
+                            }
+                        }
+                        .padding(.bottom, 8)
+                        
+                    }
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(12)
+                    .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
                 }
             }
-            
         }
         .padding()
         .navigationBarBackButtonHidden(true)
+        .background(Color.offWhite)
+    }
+    
+    func saveRecipe() {
+        let newRecipe = Recipe(
+            name: recipeName,
+            cuisine: cuisine,
+            difficulty: difficulty,
+            prepTime: prepTime,
+            cookTime: cookTime,
+            servings: servings,
+            ingredients: ingredients.filter { !$0.isEmpty }, // Remove empty strings
+            instructions: instructions.filter { !$0.isEmpty },
+            imageData: selectedImageData
+        )
+        
+        model.insert(newRecipe)
+        dismiss()
     }
 }
 
