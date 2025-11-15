@@ -27,9 +27,9 @@ struct RecipeView: View {
                 if recipes.count > 0{
                     ScrollView(showsIndicators: false){
                         LazyVStack(spacing: 32){
-                            RecipeCardView()
-                            RecipeCardView()
-                            RecipeCardView()
+                            ForEach(recipes){r in
+                                RecipeCardView(recipe: r)
+                            }
                         }
                         .padding(.bottom, 24)
                     }

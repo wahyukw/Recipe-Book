@@ -9,24 +9,39 @@ import SwiftUI
 import SwiftData
 
 struct RecipeCardView: View {
+    
+    let recipe: Recipe
+    
     var body: some View {
         VStack(alignment: .leading){
-            Rectangle()
-                .fill(Color.lighterTerracotta)
-                .frame(height: 200)
-                .overlay(
-                    Image(systemName: "photo")
-                        .font(.system(size: 50))
-                        .foregroundColor(.gray.opacity(0.5))
-                )
+            
+            if let imageData = recipe.imageData,
+               let uiImage = UIImage(data: imageData) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(height: 200)
+                    .clipped()
+            }
+            else{
+                Rectangle()
+                    .fill(Color.lighterTerracotta)
+                    .frame(height: 200)
+                    .overlay(
+                        Image(systemName: "photo")
+                            .font(.system(size: 50))
+                            .foregroundColor(.gray.opacity(0.5))
+                    )
+            }
+            
             
             VStack(alignment: .leading, spacing: 16){
-                Text("Classic Spaghetti Carbonara")
+                Text(recipe.name)
                     .font(.sectionHeader)
                 HStack(spacing: 12){
-                    Text("Italian")
+                    Text(recipe.cuisine)
                         .font(.bodyText)
-                        .foregroundColor(.red.opacity(0.8))
+                        .foregroundColor(.terracotta.opacity(0.8))
                         .padding(.horizontal, 12)
                         .padding(.vertical, 4)
                         .background(
@@ -36,7 +51,14 @@ struct RecipeCardView: View {
                     HStack(spacing: 4){
                         Image(systemName: "clock")
                             .font(.system(size: 14))
-                        Text("30 min")
+                        Text(TimeHelper.hoursText(totalMinutes: recipe.totalTime))
+                            .font(.bodyText)
+                    }
+                    .foregroundColor(.secondary)
+                    HStack(spacing: 4){
+                        Image(systemName: "person.2")
+                            .font(.system(size: 14))
+                        Text(String(recipe.servings))
                             .font(.bodyText)
                     }
                     .foregroundColor(.secondary)
@@ -49,8 +71,4 @@ struct RecipeCardView: View {
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.08), radius: 8, x: 0, y: 2)
     }
-}
-
-#Preview {
-    RecipeCardView()
 }
