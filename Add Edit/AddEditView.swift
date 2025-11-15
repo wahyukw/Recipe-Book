@@ -46,7 +46,7 @@ struct AddEditView: View {
                 .padding(.bottom, 24)
             Spacer()
             
-            ScrollView{
+            ScrollView(showsIndicators: false){
                 VStack(spacing: 24){
                     //Photo picker
                     PhotosPicker(selection: $selectedPhoto, matching: .images) {
