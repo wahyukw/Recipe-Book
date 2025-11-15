@@ -27,6 +27,16 @@ struct AddEditView: View {
     @State private var ingredients: [String] = [""]
     @State private var instructions: [String] = [""]
     
+    private var isFormValid: Bool {
+            !recipeName.trimmingCharacters(in: .whitespaces).isEmpty &&
+            !cuisine.trimmingCharacters(in: .whitespaces).isEmpty &&
+            prepTime > 0 &&
+            cookTime > 0 &&
+            servings > 0 &&
+            ingredients.contains(where: { !$0.trimmingCharacters(in: .whitespaces).isEmpty }) &&
+            instructions.contains(where: { !$0.trimmingCharacters(in: .whitespaces).isEmpty })
+        }
+    
     var body: some View {
         VStack{
             HStack{
@@ -43,6 +53,7 @@ struct AddEditView: View {
                 }
                 .foregroundStyle(.terracotta)
                 .bold()
+                .disabled(!isFormValid)
             }
             Divider()
                 .padding(.bottom, 24)
