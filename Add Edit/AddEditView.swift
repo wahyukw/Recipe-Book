@@ -13,6 +13,8 @@ struct AddEditView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var model
+    var isEdit:Bool
+    let recipe:Recipe?
     
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var selectedImageData: Data?
@@ -33,7 +35,7 @@ struct AddEditView: View {
                 }
                 .foregroundStyle(.terracotta)
                 Spacer()
-                Text("New Recipe")
+                Text(isEdit ? "Update Recipe" : "New Recipe")
                     .font(.sectionHeader)
                 Spacer()
                 Button("Save"){
@@ -328,27 +330,59 @@ struct AddEditView: View {
         }
         .padding()
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            
+            if isEdit, let recipe = recipe {
+                recipeName = recipe.name
+                cuisine = recipe.cuisine
+                difficulty = recipe.difficulty
+                prepTime = recipe.prepTime
+                cookTime = recipe.cookTime
+                servings = recipe.servings
+                ingredients = recipe.ingredients.isEmpty ? [""] : recipe.ingredients
+                instructions = recipe.instructions.isEmpty ? [""] : recipe.instructions
+                selectedImageData = recipe.imageData
+            }
+        }
         .background(Color.offWhite)
     }
     
     func saveRecipe() {
-        let newRecipe = Recipe(
-            name: recipeName,
-            cuisine: cuisine,
-            difficulty: difficulty,
-            prepTime: prepTime,
-            cookTime: cookTime,
-            servings: servings,
-            ingredients: ingredients.filter { !$0.isEmpty }, // Remove empty strings
-            instructions: instructions.filter { !$0.isEmpty },
-            imageData: selectedImageData
-        )
-        
-        model.insert(newRecipe)
-        dismiss()
+        if isEdit, let existingRecipe = recipe {
+            // ✅ Update existing recipe
+            existingRecipe.name = recipeName
+            existingRecipe.cuisine = cuisine
+            existingRecipe.difficulty = difficulty
+            existingRecipe.prepTime = prepTime
+            existingRecipe.cookTime = cookTime
+            existingRecipe.servings = servings
+            existingRecipe.ingredients = ingredients.filter { !$0.isEmpty }
+            existingRecipe.instructions = instructions.filter { !$0.isEmpty }
+            existingRecipe.imageData = selectedImageData
+        } else {
+            // ✅ Create new recipe
+            let newRecipe = Recipe(
+                name: recipeName,
+                cuisine: cuisine,
+                difficulty: difficulty,
+                prepTime: prepTime,
+                cookTime: cookTime,
+                servings: servings,
+                ingredients: ingredients.filter { !$0.isEmpty },
+                instructions: instructions.filter { !$0.isEmpty },
+                imageData: selectedImageData
+            )
+            model.insert(newRecipe)
+        }
+        do {
+            try model.save()
+            dismiss()
+        } catch {
+            print("Failed to save: \(error)")
+        }
     }
 }
 
 #Preview {
-    AddEditView()
+    AddEditView(isEdit: false, recipe: .sample)
 }

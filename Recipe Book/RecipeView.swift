@@ -29,6 +29,9 @@ struct RecipeView: View {
                         LazyVStack(spacing: 32){
                             ForEach(recipes){r in
                                 RecipeCardView(recipe: r)
+                                    .onTapGesture {
+                                        selectedRecipe = r
+                                    }
                             }
                         }
                         .padding(.bottom, 24)
@@ -63,12 +66,15 @@ struct RecipeView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink {
-                        AddEditView()
+                        AddEditView(isEdit: false, recipe: nil)
                     } label: {
                         Image(systemName: "plus")
                             .foregroundStyle(.terracotta)
                     }
                 }
+            }
+            .navigationDestination(item: $selectedRecipe) { r in
+                RecipeDetailView(recipe: r)
             }
             .background(Color.offWhite)
         }

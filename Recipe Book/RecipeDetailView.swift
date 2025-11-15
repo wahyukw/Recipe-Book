@@ -6,8 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct RecipeDetailView: View {
+    
+    @Environment(\.modelContext) private var model
+    @Environment(\.dismiss) private var dismiss
+    
+    @State private var showConfirmation = false
     
     let recipe: Recipe
     var body: some View {
@@ -95,25 +101,59 @@ struct RecipeDetailView: View {
                     }
                 }
             }
-            Button(action: {
-                
-            }, label: {
-                HStack(spacing: 12){
-                    Image(systemName: "applepencil")
-                        .font(.system(size: 20))
-                    Text("Edit Recipe")
-                        .bold()
+            
+            HStack{
+                Button(action: {
+                        showConfirmation = true
+                    }, label: {
+                        HStack(spacing: 8) {
+                            Image(systemName: "trash")
+                                .font(.system(size: 16))
+                            Text("Delete Recipe")
+                                .font(.system(size: 16, weight: .semibold))
+                        }
+                        .foregroundColor(.terracotta)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
+                        .background(Color.paleTerracotta)  // Light red background
+                        .cornerRadius(12)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.paleTerracotta)  // Red border
+                        )
+                    })
+                .confirmationDialog("Delete Recipe?", isPresented: $showConfirmation, titleVisibility: .visible) {
+                    Button("Delete", role: .destructive) {
+                        withAnimation {
+                            model.delete(recipe)
+                        }
+                        do {
+                            try model.save()
+                        } catch {
+                            print("Failed to delete: \(error)")
+                        }
+                        dismiss()
+                    }
+                    Button("Cancel", role: .cancel) { }
                 }
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
-                .background(Color.terracotta)
-                .cornerRadius(12)
-            })
+                NavigationLink(destination: AddEditView(isEdit: true, recipe: recipe)) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "pencil")
+                            .font(.system(size: 16))
+                        Text("Edit Recipe")
+                            .font(.system(size: 16, weight: .semibold))
+                    }
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 16)
+                    .background(Color.terracotta)
+                    .cornerRadius(12)
+                }
+            }
             .padding(.top, 16)
         }
-        .background(Color.offWhite)
         .padding()
+        .background(Color.offWhite)
     }
 }
 
