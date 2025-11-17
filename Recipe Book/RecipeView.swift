@@ -14,6 +14,19 @@ struct RecipeView: View {
     @State var selectedRecipe : Recipe?
     @State private var search = ""
     
+    private var filteredRecipes: [Recipe]{
+        if search.trimmingCharacters(in: .whitespaces).isEmpty{
+            return recipes
+        }
+        else{
+            return recipes.filter{recipe in
+                recipe.name.localizedCaseInsensitiveContains(search) ||
+                recipe.cuisine.localizedCaseInsensitiveContains(search) ||
+                recipe.ingredients.contains(where: {$0.localizedCaseInsensitiveContains(search)})
+            }
+        }
+    }
+    
     var body: some View {
         
         NavigationStack{
@@ -24,10 +37,10 @@ struct RecipeView: View {
                     .textFieldStyle(.roundedBorder)
                     .padding(.bottom, 32)
                 
-                if recipes.count > 0{
+                if filteredRecipes.count > 0{
                     ScrollView(showsIndicators: false){
                         LazyVStack(spacing: 32){
-                            ForEach(recipes){r in
+                            ForEach(filteredRecipes){r in
                                 RecipeCardView(recipe: r)
                                     .onTapGesture {
                                         selectedRecipe = r
