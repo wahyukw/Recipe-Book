@@ -1,28 +1,36 @@
-# Recipe Book 🍳
+# 🍳 Recipe Book
 
-## About
+> An iOS app for organizing and managing your favorite recipes with SwiftData
 
-A beautifully designed iOS recipe management app built with SwiftUI and SwiftData. Organize your favorite recipes, track cooking times, and never lose a great meal idea again.
+[![Swift](https://img.shields.io/badge/Swift-5.9-orange.svg)](https://swift.org)
+[![SwiftUI](https://img.shields.io/badge/SwiftUI-iOS%2017+-blue.svg)](https://developer.apple.com/xcode/swiftui/)
+[![Platform](https://img.shields.io/badge/Platform-iOS%2017.0+-lightgrey.svg)](https://www.apple.com/ios/)
 
-## ✨ Features
+---
 
-- **Create & Edit Recipes** - Add your own recipes with detailed information
-- **Photo Support** - Attach images to your recipes using the built-in photo picker
-- **Smart Search** - Find recipes by name, cuisine, or ingredients
-- **Recipe Details** - Track prep time, cook time, servings, difficulty level, and more
-- **Organized View** - Browse all your recipes in a clean, card-based interface
-- **Local Storage** - All data stored securely on your device using SwiftData
-- **Onboarding Experience** - Smooth first-time user experience
+## 📱 About
+
+Recipe Book is a native iOS application that helps users organize their favorite recipes with detailed information and photos. Built with SwiftUI and SwiftData, the app provides an intuitive interface for managing your culinary collection and never losing a great meal idea again.
+
+### ✨ Key Features
+
+- **📝 Create & Edit Recipes**: Add your own recipes with detailed information
+- **📸 Photo Support**: Attach images to your recipes using the built-in photo picker
+- **🔍 Smart Search**: Find recipes by name, cuisine, or ingredients
+- **ℹ️ Recipe Details**: Track prep time, cook time, servings, difficulty level, and more
+- **🎨 Organized View**: Browse all your recipes in a clean, card-based interface
+- **💾 Local Storage**: All data stored securely on your device using SwiftData
+- **👋 Onboarding Experience**: Smooth first-time user experience
 
 ---
 
 ## 📝 What I Learned
 
-Building Recipe Book helped me learn several essential iOS development concepts:
+Building Recipe Book helped me learn several key iOS development concepts:
 
 - **SwiftData**: Implementing Apple's modern persistence framework for local data storage and CRUD operations
 - **PhotosUI Integration**: Working with the native photo picker to handle image selection and data conversion
-- **Form** Validation**: Building dynamic form validation with real-time feedback and conditional button states
+- **Form Validation**: Building dynamic form validation with real-time feedback and conditional button states
 - **Search & Filtering**: Implementing efficient search algorithms across multiple data fields with case-insensitive matching
 - **Navigation Patterns**: Using NavigationStack with programmatic navigation and modal presentations
 - **Custom Styling System**: Creating reusable font extensions and a cohesive color palette for consistent design
@@ -33,38 +41,27 @@ Building Recipe Book helped me learn several essential iOS development concepts:
 
 ---
 
-## 🛠️ Technologies
+## 🛠️ Technical Stack
 
-- **SwiftUI** - Modern declarative UI framework
-- **SwiftData** - Apple's persistence framework for data storage
-- **PhotosUI** - Native photo picker integration
+### Technologies & Frameworks
+- **Language**: Swift 5.9+
+- **UI Framework**: SwiftUI
+- **Architecture**: MVVM (Model-View-ViewModel)
+- **Data Persistence**: SwiftData for local storage and CRUD operations
+- **Photo Handling**: PhotosUI for native photo picker integration
+
+### Design Patterns
+- **SwiftData Models**: Persistent data storage with computed properties
+- **Custom Enumerations**: Type-safe difficulty levels and cuisine categorization
+- **Dynamic Forms**: Real-time validation and conditional UI states
+- **Search Algorithms**: Case-insensitive multi-field filtering
+- **Confirmation Patterns**: Safe deletion with user confirmation dialogs
 
 ---
 
-## 📋 Requirements
+## 🏗️ Architecture
 
-- iOS 17.0+
-- Xcode 15.0+
-- Swift 5.9+
-
----
-
-## 🚀 Getting Started
-
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/recipe-book.git
-```
-
-2. Open the project in Xcode:
-```bash
-cd recipe-book
-open Recipe\ Book.xcodeproj
-```
-
-3. Build and run the project on your simulator or device
-
-## 📂 Project Structure
+### MVVM Structure
 
 ```
 Recipe Book/
@@ -76,7 +73,7 @@ Recipe Book/
 │   ├── RecipeCardView.swift      # Recipe card component
 │   ├── RecipeDetailView.swift    # Detailed recipe view
 │   ├── AddEditView.swift         # Add/Edit recipe form
-│   ├── OnboardingView.swift      # Onboarding screen
+│   ├── OnboardingView.swift      # First-time user experience
 │   └── OnboardingDetailView.swift
 ├── Helpers/
 │   ├── FontHelper.swift          # Custom font styles
@@ -84,46 +81,190 @@ Recipe Book/
 └── RecipeBook.swift              # App entry point
 ```
 
-## 🎨 Design Features
+### Key Components
 
-- **Custom Color Palette** - Warm terracotta theme with complementary colors
-- **Consistent Typography** - Custom font hierarchy for better readability
+#### **Recipe Model**
+- SwiftData persistent model with CRUD operations
+- Computed properties for formatted display
+- Custom enumerations for difficulty and cuisine types
+- Optional photo data storage
+
+#### **RecipeView (Main View)**
+- Dynamic recipe list with search functionality
+- Real-time filtering across multiple fields
+- Loading states and empty state handling
+- Navigation to detail and add/edit views
+
+#### **RecipeCardView**
+- Reusable recipe card component
+- Displays recipe photo, name, and key details
+- Responsive layout with consistent styling
+- Tap gesture for navigation to detail view
+
+#### **AddEditView (Form)**
+- Dynamic form with real-time validation
+- Photo picker integration for image selection
+- Add/remove functionality for ingredients and instructions
+- Conditional save button based on validation state
 
 ---
 
-## 📝 Key Functionality
+## 🎨 Features Deep Dive
 
-### Recipe Model
-Each recipe includes:
-- Name and cuisine type
-- Difficulty level (Easy, Medium, Hard)
-- Preparation and cooking time
-- Number of servings
-- Ingredients list
-- Step-by-step instructions
-- Optional photo
+### Recipe Management
+- **CRUD Operations**: Create, read, update, and delete recipes
+- **Form Validation**: Ensures all required fields are filled before saving
+- **Photo Integration**: Add and update recipe photos from your library
+- **Confirmation Dialogs**: Safe deletion with user confirmation to prevent accidents
 
 ### Search & Filter
-- Real-time search across recipe names, cuisines, and ingredients
-- Case-insensitive matching
-- Instant results as you type
+- **Real-time Search**: Instant results as you type
+- **Multi-field Matching**: Search across recipe names, cuisines, and ingredients
+- **Case-insensitive**: Smart matching regardless of capitalization
+- **Clear Feedback**: Shows filtered results immediately
 
-### CRUD Operations
-- **Create** - Add new recipes with full details
-- **Read** - View all recipes and individual recipe details
-- **Update** - Edit existing recipes
-- **Delete** - Remove recipes with confirmation dialog
+### Visual Design
+- **Custom Color Palette**: Warm terracotta theme with complementary colors
+- **Typography Hierarchy**: Custom font extensions for consistent text styling
+- **Card-based Layout**: Clean, organized view of all recipes
+- **Shadow Effects**: Depth and elevation for visual interest
+
+### User Experience
+- **Onboarding Flow**: Multi-page introduction on first launch
+- **Empty States**: Helpful prompts when no recipes exist
+- **Persistent Storage**: All data saved locally with SwiftData
 
 ---
 
-## 📱 Screenshots
+## 🔌 Data Model
+
+### Recipe Structure
+Each recipe includes:
+- **Name**: Recipe title
+- **Cuisine Type**: Categorization (Italian, Mexican, Asian, etc.)
+- **Difficulty Level**: Easy, Medium, or Hard
+- **Preparation Time**: Minutes to prep
+- **Cooking Time**: Minutes to cook
+- **Number of Servings**: How many people it serves
+- **Ingredients**: List of required ingredients
+- **Instructions**: Step-by-step cooking directions
+- **Photo**: Optional image (stored as Data)
+
+**SwiftData Integration:**
+```swift
+@Model
+class Recipe {
+    var name: String
+    var cuisine: String
+    var difficulty: Difficulty
+    var prepTime: Int
+    var cookTime: Int
+    var servings: Int
+    var ingredients: [String]
+    var instructions: [String]
+    var imageData: Data?
+    
+    // Computed properties for formatted display
+    var totalTime: Int { prepTime + cookTime }
+}
+```
+
+---
+
+## 📦 Installation & Setup
+
+### Prerequisites
+- Xcode 15.0 or later
+- iOS 17.0+ deployment target
+
+### Steps
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/wahyukw/recipe-book.git
+   cd recipe-book
+   ```
+
+2. **Open in Xcode**
+   ```bash
+   open Recipe\ Book.xcodeproj
+   ```
+
+3. **Build and Run**
+   - Select your target device/simulator
+   - Press `Cmd + R` to build and run
+
+---
+
+## 🧪 Code Highlights
+
+### SwiftData Model Definition
+```swift
+@Model
+class Recipe {
+    var name: String
+    var cuisine: String
+    var difficulty: Difficulty
+    var prepTime: Int
+    var cookTime: Int
+    var servings: Int
+    var ingredients: [String]
+    var instructions: [String]
+    var imageData: Data?
+    
+    var totalTime: Int {
+        prepTime + cookTime
+    }
+}
+```
+
+### Search Functionality with Multi-field Filtering
+```swift
+var filteredRecipes: [Recipe] {
+    guard !searchText.isEmpty else { return recipes }
+    
+    return recipes.filter { recipe in
+        recipe.name.localizedCaseInsensitiveContains(searchText) ||
+        recipe.cuisine.localizedCaseInsensitiveContains(searchText) ||
+        recipe.ingredients.contains { ingredient in
+            ingredient.localizedCaseInsensitiveContains(searchText)
+        }
+    }
+}
+```
+
+### Photo Picker Integration
+```swift
+PhotosPicker(selection: $selectedPhoto, matching: .images) {
+    if let imageData = recipe.imageData,
+       let uiImage = UIImage(data: imageData) {
+        Image(uiImage: uiImage)
+            .resizable()
+            .scaledToFill()
+    } else {
+        Image(systemName: "photo.badge.plus")
+            .font(.largeTitle)
+    }
+}
+.onChange(of: selectedPhoto) { _, newValue in
+    Task {
+        if let data = try? await newValue?.loadTransferable(type: Data.self) {
+            recipe.imageData = data
+        }
+    }
+}
+```
+
+---
+
+## 📸 Screenshots
 
 <p float="left">
   <img src="Screenshots/onboarding.png" alt="Onboarding View" height="700" />
   <img src="Screenshots/empty-state.png" alt="Empty State" height="700" />
   <img src="Screenshots/add-edit-form.png" alt="Error State" height="700" />
   <img src="Screenshots/home-view.png" alt="Home View" height="700" />
-  <img src="Screenshots/recipe-detail.png" alt="Home View" height="700" />
+  <img src="Screenshots/recipe-detail.png" alt="Recipe Detail" height="700" />
 </p>
 
 ---
@@ -144,7 +285,7 @@ This project is created for educational purposes.
 
 ---
 
-## 👤 Author
+## 👨‍💻 Author
 
 **Wahyu Kwan**
 - GitHub: [@wahyukw](https://github.com/wahyukw)
